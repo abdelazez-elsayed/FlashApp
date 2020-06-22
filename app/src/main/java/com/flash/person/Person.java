@@ -1,4 +1,5 @@
-package FlashApp.com.person;
+package com.flash.person;
+import android.media.Image;
 
 public abstract class Person {
     protected String name;
@@ -6,7 +7,7 @@ public abstract class Person {
     protected String username;
     protected String password;
     protected String phone;
-
+    protected Image ProfileImage;
     private boolean isValidMail(String email) {
         String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
         return email.matches(regex);
