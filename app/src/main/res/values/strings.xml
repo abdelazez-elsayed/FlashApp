@@ -1,3 +1,84 @@
 <resources>
+
     <string name="app_name">Flash</string>
+    <!-- 1-->
+    <string name="ek_img_content">ExportKit Image</string>
+
+    <!-- 2-->
+    <string name="according_to_ilo_about_4_of_each_5_workers_has_been_affacted_by_covid19____flash_app_brought_the_chance_to_them_again_to_earn_their_living__string"><![CDATA[According to ILO about 4 of each
+5 workers has been affacted by
+Covid19-.
+Flash App brought the chance
+to them again to earn their living.]]></string>
+
+    <!-- 3-->
+    <string name="you_can_request_a_worker_from_over_25_category___string"><![CDATA[You can request a worker
+from over 25 category. ]]></string>
+
+    <!-- 4-->
+
+    <string name="you_can_pay_with_different_methods_mastercard_visa___paypal__string"><![CDATA[You can pay with different
+methods MasterCard
+visa , PayPal.]]></string>
+    <!-- 5-->
+    <string name="you_can_rent_and_purchase_tools__material_and_spare_parts_easily_through_the_app__string"><![CDATA[You can rent and purchase
+tools, material and spare
+parts easily through the app.]]></string>
+    <!-- 6-->
+    <string name="sign_up_string">Sign up</string>
+    <string name="sign_in_string">Sign in</string>
+    <string name="forgot_password_string">Forgot Password</string>
+    <string name="creat_an_account_string">Creat an account</string>
+    <string name="username_string">Username</string>
+    <string name="password_string">Password</string>
+    <string name="login_with_facebook_string">login with facebook</string>
+    <string name="login_with_google__string">login with google </string>
+    <string name="login_string">login</string>
+    <!-- 7-->
+
+    <string name="sign_up_ek1_string">sign up</string>
+    <string name="email_string">Email</string>
+    <string name="phone_string">Phone</string>
+
+    <!-- 8-->
+    <string name="cars_string">Cars</string>
+    <string name="fashion_string">Fashion</string>
+    <string name="electronics_string">Electronics</string>
+    <string name="plumbing_string">Plumbing</string>
+    <string name="decoration_string">Decoration</string>
+    <string name="furnituer_string">Furnituer</string>
+    <string name="kichen_string">Kichen</string>
+    <string name="ask_profissinal_string"><![CDATA[Ask
+Profissinal]]></string>
+    <string name="home_string">home</string>
+    <string name="chat_string">chat</string>
+    <string name="search_string">search</string>
+    <string name="profile_string">profile</string>
+    <!-- 9-->
+
+
+
+    <string name="contact_string">contact</string>
+    <string name="swich_string">swich</string>
+    <string name="hazem_mohamed_string">Hazem Mohamed</string>
+    <string name="mechanic_string">Mechanic</string>
+    <string name="_3_4_string">3.4</string>
+    <!-- 10-->
+
+    <string name="succesfully_booked_string">successfully booked</string>
+    <string name="appointment_string">appointment</string>
+
+    <!-- 11-->
+    <string name="welcome__string">welcome,</string>
+    <string name="mahmoud_string">Mahmoud</string>
+    <string name="chats_string">Chats</string>
+    <string name="settings_string">Settings</string>
+    <string name="orders_string">Orders</string>
+    <string name="payment_string">Payment</string>
+    <string name="help_string">Help</string>
+    <string name="about_string">about</string>
+    <string name="group_57">group_57</string>
+    <string name="path_95">path_95</string>
+    <string name="dkox4p_ek1">dkox4p_ek1</string>
+    <string name="group_53">group_53</string>
 </resources>

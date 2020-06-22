@@ -7,6 +7,77 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" />
+
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".activities.artboard_3_copy_2_activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"  >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.artboard_3_copy_activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"  >
+
+        </activity>
+        <activity
+            android:name=".activities.artboard_3_activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"  >
+
+        </activity>
+        <activity
+            android:name=".activities.artboard_4_activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"  >
+
+        </activity>
+        <activity
+            android:name=".activities.artboard_5_activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"  >
+
+        </activity>
+        <activity
+            android:name=".activities.artboard_6_activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"  >
+
+        </activity>
+        <activity
+            android:name=".activities.artboard_7_activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"  >
+
+        </activity>
+        <activity
+            android:name=".activities.artboard_8_activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"  >
+
+        </activity>
+        <activity
+            android:name=".activities.artboard_8_copy_activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"  >
+
+        </activity>
+        <activity
+            android:name=".activities.artboard_8_copy_3_activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"  >
+
+        </activity>
+        <activity
+            android:name=".activities.artboard_8_copy_2_activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"  >
+
+        </activity>
+        </application>
 
 </manifest>

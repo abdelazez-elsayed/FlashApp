@@ -3,4 +3,99 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <!-- 1-->
+    <color name="_bg__artboard_3_copy_2_color">#ffffff</color>
+    <color name="rectangle_49_color">#ffffff</color>
+    <!-- 2-->
+
+    <color name="_bg__artboard_3_copy_color">#ffffff</color>
+    <color name="rectangle_52_color">#ffffff</color>
+    <color name="rectangle_54_color">#fefefe</color>
+    <color name="ellipse_13_color">#ffa12b</color>
+    <color name="ellipse_19_color">#ffa02b</color>
+    <color name="according_to_ilo_about_4_of_each_5_workers_has_been_affacted_by_covid19____flash_app_brought_the_chance_to_them_again_to_earn_their_living__color">#293646</color>
+    <color name="ellipse_28_color">#00ac98</color>
+
+    <!-- 3-->
+    <color name="_bg__artboard_3_color">#ffffff</color>
+    <color name="rectangle_113_color">#fefefe</color>
+    <color name="rectangle_114_color">#f8bf54</color>
+    <color name="you_can_request_a_worker_from_over_25_category___color">#fefefe</color>
+    <color name="rectangle_115_color">#e8e8e8</color>
+    <color name="rectangle_117_color">#ffcd26</color>
+    <color name="rectangle_119_color">#aeaeae</color>
+    <color name="rectangle_123_color">#faa436</color>
+    <!-- 4-->
+
+    <color name="_bg__artboard_4_color">#ffffff</color>
+    <color name="rectangle_97_color">#fefefe</color>
+    <color name="rectangle_98_color">#ed5443</color>
+    <color name="ellipse_40_color">#ff6110</color>
+    <color name="ellipse_41_color">#ffd36b</color>
+    <color name="rectangle_99_color">#bf4d26</color>
+    <color name="rectangle_102_color">#051445</color>
+    <color name="ellipse_46_color">#c64624</color>
+    <color name="you_can_pay_with_different_methods_mastercard_visa___paypal__color">#fefefe</color>
+
+    <!-- 5-->
+    <color name="_bg__artboard_5_color">#ffffff</color>
+    <color name="rectangle_85_color">#fefefe</color>
+    <color name="rectangle_86_color">#863d8d</color>
+    <color name="you_can_rent_and_purchase_tools__material_and_spare_parts_easily_through_the_app__color">#fefefe</color>
+    <color name="rectangle_87_color">#e8e8e8</color>
+    <color name="rectangle_88_color">#535353</color>
+    <color name="rectangle_89_color">#3b3b3b</color>
+    <color name="ellipse_38_color">#565058</color>
+    <color name="ellipse_39_color">#f5f7fa</color>
+    <color name="rectangle_96_color">#4f4f4f</color>
+    <!-- 6-->
+
+    <color name="_bg__artboard_6_color">#ffffff</color>
+    <color name="rectangle_77_color">#f8bf54</color>
+    <color name="rectangle_78_color">#fefefe</color>
+    <color name="sign_up_color">#000000</color>
+    <color name="forgot_password_color">#ed5443</color>
+    <color name="username_color">#cccccc</color>
+    <color name="rectangle_82_color">#3b5997</color>
+    <color name="login_with_facebook_color">#ffffff</color>
+    <color name="rectangle_83_color">#cd4639</color>
+
+    <!-- 7-->
+
+    <color name="_bg__artboard_7_color">#ffffff</color>
+    <color name="rectangle_72_color">#ed5443</color>
+    <color name="rectangle_73_color">#fefefe</color>
+    <color name="sign_up_ek1_color">#ffffff</color>
+  <!-- TO Change  <color name="username_color">#b3b3b3</color> -->
+    <!-- 8-->
+    <color name="_bg__artboard_8_color">#ffffff</color>
+    <color name="rectangle_56_color">#ffffff</color>
+    <color name="rectangle_66_color">#ed5544</color>
+    <color name="cars_color">#333333</color>
+    <!-- 9-->
+
+    <color name="_bg__artboard_8_copy_color">#ffffff</color>
+    <color name="rectangle_37_color">#ffffff</color>
+    <color name="rectangle_44_color">#3dc45b</color>
+
+    <!-- 10-->
+
+    <color name="_bg__artboard_8_copy_3_color">#ffffff</color>
+    <color name="rectangle_2_color">#ffffff</color>
+    <color name="home_color">#333333</color>
+    <color name="chat_color">#b3b3b3</color>
+    <color name="rectangle_9_color">#3dc45b</color>
+    <color name="swich_color">#808080</color>
+    <color name="hazem_mohamed_color">#000000</color>
+    <color name="mechanic_color">#4d4d4d</color>
+    <color name="rectangle_14_color">#1a1a1a</color>
+    <color name="rectangle_15_color">#fefefe</color>
+    <color name="rectangle_17_color">#e6e6e6</color>
+    <!-- 11-->
+    <color name="_bg__artboard_8_copy_2_color">#ffffff</color>
+    <color name="rectangle_19_color">#ffffff</color>
+    <color name="welcome__color">#333333</color>
+    <color name="mahmoud_color">#000000</color>
+    <color name="about_color">#808080</color>
+
 </resources>
