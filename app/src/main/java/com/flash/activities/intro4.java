@@ -18,8 +18,9 @@ public class intro4 extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(intro4.this,LogIn.class);
+                Intent i = new Intent(intro4.this, LogIn.class);
                 startActivity(i);
+                finish();
             }
         });
     }

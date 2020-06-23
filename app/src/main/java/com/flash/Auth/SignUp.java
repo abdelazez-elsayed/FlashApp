@@ -1,17 +1,13 @@
-package com.flash.Auth;
+/*package com.flash.Auth;
 
-import android.app.AppComponentFactory;
 import android.content.Intent;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
-import com.flash.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -38,6 +34,8 @@ public class SignUp extends AppCompatActivity {
     {
         mAuth =FirebaseAuth.getInstance();
     }
+
+
 
 
     public boolean signUpWithEmailAndPass(String Email, String Password)
@@ -140,3 +138,4 @@ public class SignUp extends AppCompatActivity {
 
 
 }
+*/

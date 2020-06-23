@@ -5,7 +5,7 @@ public class User extends Person {
     private int numOfOrders;
     private String userId;
     private double pocket;
-    User(){}
+    public User(){}
 
     public int getNumOfOrders() {
         return numOfOrders;

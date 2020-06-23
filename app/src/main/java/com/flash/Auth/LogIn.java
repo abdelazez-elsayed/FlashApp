@@ -1,15 +1,19 @@
-package com.flash.Auth;
+/*package com.flash.Auth;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.flash.R;
 import com.flash.person.Person;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,12 +31,24 @@ public class LogIn extends AppCompatActivity {
 
     AccountManager am;
     FirebaseAuth mAuth = null;
+    Button signUp, forgetPassword,logIn,logInWithFB,logInWithGoogle;
+    TextView email,password;
+    @SuppressLint("WrongViewCast")
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_log_in);
+//        signUp = findViewById(R.id.SignUp);
+//        forgetPassword = findViewById(R.id.forgrtPassword);
+//        logIn = findViewById(R.id.logIn);
+//        logInWithFB =(Button)findViewById(R.id.logInWithFB);
+//        logInWithGoogle = (Button)findViewById(R.id.logInWithG);
+//        email = findViewById(R.id.EmailText);
+//        password = findViewById(R.id.PasswordText);
+
 
     }
+
     // "this" references the current Context
     public int loginByEmailAndPassword(String Email,String password){
         mAuth = FirebaseAuth.getInstance();
@@ -66,3 +82,4 @@ public class LogIn extends AppCompatActivity {
     }
 
 }
+*/
