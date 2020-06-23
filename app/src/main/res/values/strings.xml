@@ -3,6 +3,8 @@
     <string name="app_name">Flash</string>
     <!-- 1-->
     <string name="ek_img_content">ExportKit Image</string>
+    <string name="todo">Empty</string>
+    <string name="empty">Empty</string>
 
     <!-- 2-->
     <string name="according_to_ilo_about_4_of_each_5_workers_has_been_affacted_by_covid19____flash_app_brought_the_chance_to_them_again_to_earn_their_living__string"><![CDATA[According to ILO about 4 of each
@@ -97,4 +99,5 @@ Profissinal]]></string>
     <string name="message">Message</string>
     <string name="image_message">Image Message</string>
     <string name="button">Button</string>
+    <string name="hbd">HbD</string>
 </resources>

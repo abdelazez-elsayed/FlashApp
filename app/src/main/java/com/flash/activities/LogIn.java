@@ -19,13 +19,13 @@ public class LogIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-//        signUp = findViewById(R.id.SignUp);
-//        forgetPassword = findViewById(R.id.forgrtPassword);
-//        logIn = findViewById(R.id.logIn);
-//        logInWithFB =(Button)findViewById(R.id.logInWithFB);
-//        logInWithGoogle = (Button)findViewById(R.id.logInWithG);
-//        email = findViewById(R.id.EmailText);
-//        password = findViewById(R.id.PasswordText);
+       signUp = findViewById(R.id.SignUp);
+        forgetPassword = findViewById(R.id.forgrtPassword);
+        logIn = findViewById(R.id.logIn);
+        logInWithFB =(ImageButton)findViewById(R.id.logInWithFB);
+       logInWithGoogle = (ImageButton)findViewById(R.id.logInWithG);
+        email = findViewById(R.id.EmailTextup);
+        password = findViewById(R.id.PasswordTextup);
 
 
     }
