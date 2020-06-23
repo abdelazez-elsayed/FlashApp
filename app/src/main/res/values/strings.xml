@@ -57,7 +57,6 @@ Profissinal]]></string>
     <!-- 9-->
 
 
-
     <string name="contact_string">contact</string>
     <string name="swich_string">swich</string>
     <string name="hazem_mohamed_string">Hazem Mohamed</string>
@@ -97,4 +96,5 @@ Profissinal]]></string>
     <string name="sendbutton">sendButton</string>
     <string name="message">Message</string>
     <string name="image_message">Image Message</string>
+    <string name="button">Button</string>
 </resources>

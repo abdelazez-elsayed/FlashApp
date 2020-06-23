@@ -28,7 +28,7 @@
         layout="@layout/app_bar_layout" />
 
     <include
-        android:id="custom_bar"
+        android:id="@+id/custom_chat_bar"
         layout="@layout/custom_chat_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -45,7 +45,7 @@
         android:background="#F6F5F5"
         android:orientation="horizontal">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/add_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
             android:padding="10dp"
             app:srcCompat="@drawable/baseline_add_black_18dp" />
 
-        <TextView
+        <EditText
             android:id="@+id/messageTextView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -68,7 +68,8 @@
             android:paddingEnd="10dp"
             android:paddingRight="16dp"
             android:text="@string/write_message"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:autofillHints="@string/write_message" />
 
         <ImageView
             android:id="@+id/send_button"

@@ -11,7 +11,7 @@ public abstract class Person {
     Person() {}
 
 
-    private boolean isValidMail(String email) {
+    public static boolean isValidMail(String email) {
         String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
         return email.matches(regex);
     }
