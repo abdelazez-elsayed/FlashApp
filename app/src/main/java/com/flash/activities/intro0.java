@@ -17,20 +17,21 @@ public class intro0 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro0);
         //delay
-        new CountDownTimer(5000,3000){
-
+        new Thread(new Runnable() {
             @Override
-            public void onTick(long l) {
-                setContentView(R.layout.activity_intro0);
+            public void run() {
+                try {
+                    Thread.sleep(4000);
+                    Intent i = new Intent(intro0.this,intro1.class);
+                    startActivity(i);
+                    finish();
+                }
+                catch (InterruptedException e){
+                    e.printStackTrace();
+                }
             }
+        }).start();
 
-            @Override
-            public void onFinish() {
-
-            }
-        }.start();
-        Intent i = new Intent(intro0.this,intro1.class);
-        startActivity(i);
 
     }
 }

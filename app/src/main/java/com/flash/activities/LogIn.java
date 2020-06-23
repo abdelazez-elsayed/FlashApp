@@ -4,14 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.flash.R;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class LogIn extends AppCompatActivity {
-    Button signUp, forgetPassword,logIn,logInWithFB,logInWithGoogle;
+    Button signUp, forgetPassword,logIn;
+    ImageButton logInWithFB,logInWithGoogle;
     TextView email,password;
-    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -8,17 +8,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class intro1 extends AppCompatActivity {
+public class intro2 extends AppCompatActivity {
     ImageButton skip;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intro1);
-        skip = findViewById(R.id.skip1);
+        setContentView(R.layout.activity_intro2);
+        skip = findViewById(R.id.skip2);
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(intro1.this,intro2.class);
+                Intent i = new Intent(intro2.this,intro3.class);
                 startActivity(i);
             }
         });
