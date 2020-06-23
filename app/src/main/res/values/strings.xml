@@ -3,6 +3,7 @@
     <string name="app_name">Flash</string>
     <!-- 1-->
     <string name="ek_img_content">ExportKit Image</string>
+    <string name="empty"> </string>
 
     <!-- 2-->
     <string name="according_to_ilo_about_4_of_each_5_workers_has_been_affacted_by_covid19____flash_app_brought_the_chance_to_them_again_to_earn_their_living__string"><![CDATA[According to ILO about 4 of each
@@ -57,7 +58,6 @@ Profissinal]]></string>
     <!-- 9-->
 
 
-
     <string name="contact_string">contact</string>
     <string name="swich_string">swich</string>
     <string name="hazem_mohamed_string">Hazem Mohamed</string>
@@ -81,4 +81,5 @@ Profissinal]]></string>
     <string name="path_95">path_95</string>
     <string name="dkox4p_ek1">dkox4p_ek1</string>
     <string name="group_53">group_53</string>
+    <string name="todo">TODO</string>
 </resources>

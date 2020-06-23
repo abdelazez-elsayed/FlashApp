@@ -38,7 +38,7 @@ public class LogIn extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         if(Email.isEmpty())return EMPTY_EMAIL_ADDRESS_FIELD;
         if(password.isEmpty())return EMPTY_PASSWORD_FIELD;
-        if(!Person.isValidMail(Email))return INVALID_MAIL_ADDRESS;
+        //if(!Person.isValidMail(Email))return INVALID_MAIL_ADDRESS;
         final int[] op = new int[1];
         mAuth.signInWithEmailAndPassword(Email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

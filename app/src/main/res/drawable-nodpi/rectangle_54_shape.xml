@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- rectangle_54 from your PSD file. -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-	android:shape="rectangle" >
-	<corners android:radius="70.19378662109375dp" />
-	<solid android:color="@color/rectangle_54_color" />
-</shape>
-
