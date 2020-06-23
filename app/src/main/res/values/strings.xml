@@ -81,4 +81,20 @@ Profissinal]]></string>
     <string name="path_95">path_95</string>
     <string name="dkox4p_ek1">dkox4p_ek1</string>
     <string name="group_53">group_53</string>
+    <string name="path_439">path_439</string>
+    <string name="line_44">line_44</string>
+    <string name="line_45">line_45</string>
+    <string name="line_46">line_46</string>
+    <string name="line_47">line_47</string>
+    <string name="path_440">path_440</string>
+    <string name="path_441">path_441</string>
+    <string name="path_442">path_442</string>
+    <string name="path_443">path_443</string>
+    <string name="seen">Seen</string>
+    <string name="display_name">Display Name</string>
+    <string name="write_message">write message</string>
+    <string name="add_button">add_button</string>
+    <string name="sendbutton">sendButton</string>
+    <string name="message">Message</string>
+    <string name="image_message">Image Message</string>
 </resources>

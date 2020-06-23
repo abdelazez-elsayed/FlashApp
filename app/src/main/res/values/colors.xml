@@ -97,5 +97,6 @@
     <color name="welcome__color">#333333</color>
     <color name="mahmoud_color">#000000</color>
     <color name="about_color">#808080</color>
-
+    <color name="brandingColorPurple">#863D8D</color>
+    <color name="brandingColorYellow">#F8BF54</color>
 </resources>
