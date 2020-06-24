@@ -1,17 +1,13 @@
 package com.flash.activities;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.os.Handler;
-import android.os.SystemClock;
 
 import com.flash.R;
+import com.flash.chat.ChatActivity;
+import com.flash.chat.MainActivity;
+
 public class intro0 extends AppCompatActivity {
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +18,7 @@ public class intro0 extends AppCompatActivity {
             public void run() {
                 try {
                     Thread.sleep(4000);
-                    Intent i = new Intent(intro0.this,intro1.class);
+                    Intent i = new Intent(intro0.this, LogIn.class);
                     startActivity(i);
                     finish();
                 }
@@ -31,7 +27,6 @@ public class intro0 extends AppCompatActivity {
                 }
             }
         }).start();
-
 
     }
 }

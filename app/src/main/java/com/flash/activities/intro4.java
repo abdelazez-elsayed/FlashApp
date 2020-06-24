@@ -20,6 +20,7 @@ public class intro4 extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(intro4.this,LogIn.class);
                 startActivity(i);
+                finish();
             }
         });
     }
