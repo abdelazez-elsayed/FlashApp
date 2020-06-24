@@ -51,4 +51,6 @@ parts easily through the app.]]></string>
     <string name="image_message">Image Message</string>
     <string name="button">Button</string>
     <string name="hbd">HbD</string>
+    <string name="i_m_a_client">I\'m a CLIENT</string>
+    <string name="i_m_a_worker">I\'m a WORKER</string>
 </resources>
