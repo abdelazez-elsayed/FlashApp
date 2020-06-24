@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +36,7 @@ public class SignUp extends AppCompatActivity {
     private ImageButton signUp, photoPicker;
     private TextView userName,email, phone,password;
     private ProgressDialog progressDialog;
-
+    private RadioButton radioWorker,radioClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,10 @@ public class SignUp extends AppCompatActivity {
         phone = findViewById(R.id.editTextPhone);
         email = findViewById(R.id.EmailTextup);
         password = findViewById(R.id.PasswordTextup);
+
+        radioClient = findViewById(R.id.ClientRadio);
+        radioWorker = findViewById(R.id.WorkerRadio);
+        //radioWorker.isChecked();
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override

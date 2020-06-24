@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -16,7 +15,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.flash.DataBase.DataBase;
 import com.flash.R;
+import com.flash.chat.ChatActivity;
+import com.flash.person.User;
+import com.flash.person.Worker;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -37,6 +40,8 @@ public class LogIn extends AppCompatActivity {
     public static final int EMPTY_EMAIL_ADDRESS_FIELD = 4;
     public static final int EMPTY_PASSWORD_FIELD = 5;
 
+
+    private boolean isUser;
     private ProgressDialog progressDialog;
     private AccountManager am;
     private FirebaseAuth mAuth = null;
@@ -53,12 +58,13 @@ public class LogIn extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
         signUp = findViewById(R.id.signUpButton);
 //        forgetPassword = findViewById(R.id.forgrtPassword);
-        logIn = findViewById(R.id.logout);
+        logIn = findViewById(R.id.logIn);
 //        logInWithFB =(Button)findViewById(R.id.logInWithFB);
         logInWithGoogle = findViewById(R.id.logInWithG);
         email = findViewById(R.id.EmailTextup);
         password = findViewById(R.id.PasswordTextup);
 
+        isUser = true;
         progressDialog = new ProgressDialog(this);
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,10 +73,9 @@ public class LogIn extends AppCompatActivity {
                 progressDialog.setTitle("Sign in");
                 progressDialog.setMessage("We are working to let you in");
                 progressDialog.setCanceledOnTouchOutside(false);
-//                progressDialog.show();
+                progressDialog.show();
+
                 loginByEmailAndPassword(email.getText().toString(), password.getText().toString());
-                Intent intent = new Intent(LogIn.this, Logout.class);
-                startActivity(intent);
             }
         });
 
@@ -182,7 +187,6 @@ public class LogIn extends AppCompatActivity {
                     updateUi(user);
                 }
                 else {
-                    Log.d("SIGN_IN",task.toString());
                     Toast.makeText(LogIn.this, "Signed In failed ", Toast.LENGTH_SHORT).show();
                     updateUi(null);
                 }
@@ -193,12 +197,41 @@ public class LogIn extends AppCompatActivity {
     private void updateUi(FirebaseUser user) {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
 
-        if (account != null)
-        {
-            System.out.println(account.getDisplayName() + " " + account.getFamilyName() + " " + account.getEmail());
+        DataBase dataBase = DataBase.getInstance();
+        if (account == null)
+            return;
+
+        if (isUser) {
+            User currUser = new User();
+            currUser.setPocket(0)
+                    .setNumOfOrders(0)
+                    .setUserId(user.getUid())
+                    .setUsername(account.getDisplayName())
+                    .setPassword("")
+                    .setPhone("")
+                    .setName(account.getGivenName())
+                    .setEmail(account.getEmail());
+            dataBase.addUser(currUser);
         }
-        Intent intent = new Intent(LogIn.this, Logout.class);
-        startActivity(intent);
+        else {
+            Worker currWorker = new Worker();
+            currWorker.setDescription("")
+                    .setLowestEstimatedPrice(0)
+                    .setHighestEstimatedPrice(100)
+                    .setRate(0)
+                    .setWorkerId(user.getUid())
+                    .setNumOfTransactions(0)
+                    .setSpecialization("")
+                    .setUsername(account.getDisplayName())
+                    .setPassword("")
+                    .setPhone("")
+                    .setName(account.getGivenName())
+                    .setEmail(account.getEmail());
+            dataBase.addWorker(currWorker);
+        }
+
+
+        System.out.println(account.getDisplayName() + " " + account.getFamilyName() + " " + account.getEmail());
     }
 
 
