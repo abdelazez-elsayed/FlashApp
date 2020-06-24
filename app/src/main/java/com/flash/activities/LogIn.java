@@ -124,9 +124,9 @@ public class LogIn extends AppCompatActivity {
 
     public boolean signUpWithGoogleAcc(ImageButton signIn)
     {
-
+        mAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(String.valueOf(R.string.default_web_client_id))
+                .requestIdToken(getString((R.string.default_web_client_id)))
                 .requestEmail()
                 .build();
 
@@ -163,7 +163,7 @@ public class LogIn extends AppCompatActivity {
 
             }
             catch (ApiException e) {
-                Toast.makeText(LogIn.this, "Bad request", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LogIn.this, "Bad request" + e.getMessage(), Toast.LENGTH_SHORT).show();
                 // FireBaseGoogleAuth(null);
             }
         }
