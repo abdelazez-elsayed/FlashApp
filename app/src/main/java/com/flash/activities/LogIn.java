@@ -209,6 +209,7 @@ public class LogIn extends AppCompatActivity {
                     .setUsername(account.getDisplayName())
                     .setPassword("")
                     .setPhone("")
+                    .setName(account.getGivenName())
                     .setEmail(account.getEmail());
             dataBase.addUser(currUser);
         }
@@ -224,6 +225,7 @@ public class LogIn extends AppCompatActivity {
                     .setUsername(account.getDisplayName())
                     .setPassword("")
                     .setPhone("")
+                    .setName(account.getGivenName())
                     .setEmail(account.getEmail());
             dataBase.addWorker(currWorker);
         }
