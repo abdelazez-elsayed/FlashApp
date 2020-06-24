@@ -2,6 +2,7 @@ package com.flash.activities;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -69,6 +70,8 @@ public class SignUp extends AppCompatActivity {
                                 .setPassword(password.getText().toString())
                                 .setPhone(phone.getText().toString())
                                 .setName(userName.getText().toString()));
+                Intent intent = new Intent(SignUp.this, Logout.class);
+                startActivity(intent);
             }
         });
     }
@@ -96,6 +99,7 @@ public class SignUp extends AppCompatActivity {
                             }
                             else
                                 dataBase.addWorker(((Worker) person).setWorkerId(mAuth.getCurrentUser().getUid()));
+
                         }
                         else {
 

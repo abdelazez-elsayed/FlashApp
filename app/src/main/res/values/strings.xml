@@ -100,4 +100,5 @@ Profissinal]]></string>
     <string name="image_message">Image Message</string>
     <string name="button">Button</string>
     <string name="hbd">HbD</string>
+    <string name="logout">logout</string>
 </resources>

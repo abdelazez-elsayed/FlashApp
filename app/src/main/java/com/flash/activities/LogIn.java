@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.flash.R;
-import com.flash.chat.ChatActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -53,7 +52,7 @@ public class LogIn extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
         signUp = findViewById(R.id.signUpButton);
 //        forgetPassword = findViewById(R.id.forgrtPassword);
-        logIn = findViewById(R.id.logIn);
+        logIn = findViewById(R.id.logout);
 //        logInWithFB =(Button)findViewById(R.id.logInWithFB);
         logInWithGoogle = findViewById(R.id.logInWithG);
         email = findViewById(R.id.EmailTextup);
@@ -68,8 +67,9 @@ public class LogIn extends AppCompatActivity {
                 progressDialog.setMessage("We are working to let you in");
                 progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.show();
-
                 loginByEmailAndPassword(email.getText().toString(), password.getText().toString());
+                Intent intent = new Intent(LogIn.this, Logout.class);
+                startActivity(intent);
             }
         });
 
@@ -195,6 +195,8 @@ public class LogIn extends AppCompatActivity {
         {
             System.out.println(account.getDisplayName() + " " + account.getFamilyName() + " " + account.getEmail());
         }
+        Intent intent = new Intent(LogIn.this, Logout.class);
+        startActivity(intent);
     }
 
 
