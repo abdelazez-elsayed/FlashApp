@@ -7,7 +7,7 @@ public class Worker extends Person {
     private double rate;
     private int lowestEstimatedPrice, highestEstimatedPrice;
 
-    Worker() {}
+    public Worker() {}
 
     public String getWorkerId() {
         return workerId;
