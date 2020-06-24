@@ -52,7 +52,7 @@ public class LogIn extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
         signUp = findViewById(R.id.signUpButton);
 //        forgetPassword = findViewById(R.id.forgrtPassword);
-        logIn = findViewById(R.id.logout);
+        logIn = findViewById(R.id.loginButton);
 //        logInWithFB =(Button)findViewById(R.id.logInWithFB);
         logInWithGoogle = findViewById(R.id.logInWithG);
         email = findViewById(R.id.EmailTextup);

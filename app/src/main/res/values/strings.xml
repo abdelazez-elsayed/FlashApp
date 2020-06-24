@@ -2,7 +2,6 @@
 
     <string name="app_name">Flash</string>
     <!-- 1-->
-    <string name="ek_img_content">ExportKit Image</string>
     <string name="todo">Empty</string>
     <string name="empty">Empty</string>
 
@@ -28,70 +27,22 @@ tools, material and spare
 parts easily through the app.]]></string>
     <!-- 6-->
     <string name="sign_up_string">Sign up</string>
-    <string name="sign_in_string">Sign in</string>
     <string name="forgot_password_string">Forgot Password</string>
-    <string name="creat_an_account_string">Creat an account</string>
     <string name="username_string">Username</string>
     <string name="password_string">Password</string>
-    <string name="login_with_facebook_string">login with facebook</string>
-    <string name="login_with_google__string">login with google </string>
     <string name="login_string">login</string>
     <!-- 7-->
 
-    <string name="sign_up_ek1_string">sign up</string>
     <string name="email_string">Email</string>
     <string name="phone_string">Phone</string>
 
     <!-- 8-->
-    <string name="cars_string">Cars</string>
-    <string name="fashion_string">Fashion</string>
-    <string name="electronics_string">Electronics</string>
-    <string name="plumbing_string">Plumbing</string>
-    <string name="decoration_string">Decoration</string>
-    <string name="furnituer_string">Furnituer</string>
-    <string name="kichen_string">Kichen</string>
-    <string name="ask_profissinal_string"><![CDATA[Ask
-Profissinal]]></string>
-    <string name="home_string">home</string>
-    <string name="chat_string">chat</string>
-    <string name="search_string">search</string>
-    <string name="profile_string">profile</string>
     <!-- 9-->
 
 
-    <string name="contact_string">contact</string>
-    <string name="swich_string">swich</string>
-    <string name="hazem_mohamed_string">Hazem Mohamed</string>
-    <string name="mechanic_string">Mechanic</string>
-    <string name="_3_4_string">3.4</string>
     <!-- 10-->
 
-    <string name="succesfully_booked_string">successfully booked</string>
-    <string name="appointment_string">appointment</string>
-
     <!-- 11-->
-    <string name="welcome__string">welcome,</string>
-    <string name="mahmoud_string">Mahmoud</string>
-    <string name="chats_string">Chats</string>
-    <string name="settings_string">Settings</string>
-    <string name="orders_string">Orders</string>
-    <string name="payment_string">Payment</string>
-    <string name="help_string">Help</string>
-    <string name="about_string">about</string>
-    <string name="group_57">group_57</string>
-    <string name="path_95">path_95</string>
-    <string name="dkox4p_ek1">dkox4p_ek1</string>
-    <string name="group_53">group_53</string>
-    <string name="path_439">path_439</string>
-    <string name="line_44">line_44</string>
-    <string name="line_45">line_45</string>
-    <string name="line_46">line_46</string>
-    <string name="line_47">line_47</string>
-    <string name="path_440">path_440</string>
-    <string name="path_441">path_441</string>
-    <string name="path_442">path_442</string>
-    <string name="path_443">path_443</string>
-    <string name="seen">Seen</string>
     <string name="display_name">Display Name</string>
     <string name="write_message">write message</string>
     <string name="add_button">add_button</string>
