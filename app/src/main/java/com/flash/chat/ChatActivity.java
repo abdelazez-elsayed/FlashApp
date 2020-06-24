@@ -108,9 +108,8 @@ public class ChatActivity extends AppCompatActivity {
                                 Log.d("CHAT_LOG",error.getMessage());
                             }
                         }
-                    })
-
-                    ;                }
+                    });
+                }
             }
 
             @Override

@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -18,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.flash.DataBase.DataBase;
 import com.flash.R;
 import com.flash.chat.ChatActivity;
+import com.flash.chat.MainActivity;
 import com.flash.person.User;
 import com.flash.person.Worker;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -58,7 +60,7 @@ public class LogIn extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
         signUp = findViewById(R.id.signUpButton);
 //        forgetPassword = findViewById(R.id.forgrtPassword);
-        logIn = findViewById(R.id.logIn);
+        logIn = findViewById(R.id.logInButton);
 //        logInWithFB =(Button)findViewById(R.id.logInWithFB);
         logInWithGoogle = findViewById(R.id.logInWithG);
         email = findViewById(R.id.EmailTextup);
@@ -76,6 +78,7 @@ public class LogIn extends AppCompatActivity {
                 progressDialog.show();
 
                 loginByEmailAndPassword(email.getText().toString(), password.getText().toString());
+                gotoChat();
             }
         });
 
@@ -89,6 +92,13 @@ public class LogIn extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void gotoChat()
+    {
+        Intent intentChat = new Intent(LogIn.this, MainActivity.class);
+        startActivity(intentChat);
+        finish();
     }
 
     // "this" references the current Context
@@ -232,6 +242,7 @@ public class LogIn extends AppCompatActivity {
 
 
         System.out.println(account.getDisplayName() + " " + account.getFamilyName() + " " + account.getEmail());
+        gotoChat();
     }
 
 

@@ -2,7 +2,7 @@ package com.flash.person;
 
 public abstract class Person {
     public String name;
-    public String Email;
+    public String email;
     public String username;
     public String password;
     public String phone;
@@ -26,13 +26,12 @@ public abstract class Person {
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
-    public void setEmail(String email) {
-        if(!isValidMail(email)) return;
-        Email = email;
-
+    public void setEmail(String Email) {
+        if(!isValidMail(Email)) return;
+        this.email = Email;
     }
 
     public String getUsername() {
