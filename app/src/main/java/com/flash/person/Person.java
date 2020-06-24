@@ -1,11 +1,11 @@
 package com.flash.person;
 
 public abstract class Person {
-    private String name;
-    private String Email;
-    private String username;
-    private String password;
-    private String phone;
+    public String name;
+    public String Email;
+    public String username;
+    public String password;
+    public String phone;
 
 
     Person() {}

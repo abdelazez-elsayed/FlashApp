@@ -17,7 +17,7 @@ public class intro0 extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(4000);
+                    Thread.sleep(1);
                     Intent i = new Intent(intro0.this, LogIn.class);
                     startActivity(i);
                     finish();

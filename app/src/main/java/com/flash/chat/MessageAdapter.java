@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.flash.R;
+import com.flash.person.Person;
+import com.flash.person.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,14 +48,16 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         Message msg = messagesList.get(position);
         String from = msg.getFrom();
         String type = msg.getType();
-        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(from);
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Flash").child("Users").child(from);
         mUserDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String name = snapshot.child("name").getValue().toString();
-                String image = snapshot.child("thumb_image").getValue().toString();
-                holder.displayName.setText(name);
-                Picasso.get().load(image).placeholder(R.drawable.default_avatar).into(holder.profileImage);
+                    String name = snapshot.child("name").getValue().toString();
+
+
+          //      String image = snapshot.child("thumb_image").getValue().toString();
+
+              //  Picasso.get().load(image).placeholder(R.drawable.default_avatar).into(holder.profileImage);
             }
 
             @Override
@@ -70,13 +74,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             holder.messageText.setBackgroundColor(R.drawable.message_background);
             holder.messageText.setTextColor(Color.WHITE);
         }
-        holder.messageText.setText(msg.getMsg());
+        holder.messageText.setText(msg.getMessage());
         if(type.equals("text")){
-            holder.messageText.setText(msg.getMsg());
+            holder.messageText.setText(msg.getMessage());
             holder.messageImage.setVisibility(View.INVISIBLE);
         }else {
             holder.messageText.setVisibility(View.INVISIBLE);
-            Picasso.get().load(msg.getMsg()).placeholder(R.drawable.default_avatar).into(holder.messageImage);
+            Picasso.get().load(msg.getMessage()).placeholder(R.drawable.default_avatar).into(holder.messageImage);
         }
 
     }
@@ -89,13 +93,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public class MessageViewHolder extends RecyclerView.ViewHolder {
         public TextView messageText;
         public CircleImageView profileImage;
-        public TextView displayName;
+
         public ImageView messageImage;
         public MessageViewHolder (View view) {
             super(view);
             messageText = (TextView) view.findViewById(R.id.message_body_layout);
             profileImage = (CircleImageView) view.findViewById(R.id.messgae_profile_pic_layout);
-            displayName = (TextView) view.findViewById(R.id.char_name);
+
             messageImage= (ImageView) view.findViewById(R.id.imageMessage);
         }
     }

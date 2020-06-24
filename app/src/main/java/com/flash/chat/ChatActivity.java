@@ -69,6 +69,7 @@ public class ChatActivity extends AppCompatActivity {
         Bundle extra = getIntent().getExtras();
         mImageStorage = FirebaseStorage.getInstance().getReference();
         /////////
+        sendButton = (ImageButton) findViewById(R.id.send_button);
         messageAdapter = new MessageAdapter(messageList);
         targetNameText = (TextView) findViewById(R.id.char_name);
         addBtn = (ImageButton) findViewById(R.id.add_button);
@@ -77,7 +78,10 @@ public class ChatActivity extends AppCompatActivity {
         mMessagesList = (RecyclerView) findViewById(R.id.messagesList);
         mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.message_swipe_refresh);
         mMessagesList.setHasFixedSize(true);
+        messageAdapter = new MessageAdapter(messageList);
+        mLinearLayout = new LinearLayoutManager(this);
         mMessagesList.setLayoutManager(mLinearLayout);
+        mMessagesList.setAdapter(messageAdapter);
 
 
         ////////
@@ -182,13 +186,22 @@ public class ChatActivity extends AppCompatActivity {
 
     private void loadMoreMessages() {
         DatabaseReference msgRef = databaseReference.child("messages").child(currentUserID).child(targetUserID);
+
         Query messageQuery = msgRef.orderByKey().endAt(mLasKey).limitToLast(TOTAL_ITEM_PER_PAGE);
+
         messageQuery.addChildEventListener(new ChildEventListener() {
+
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                long a =snapshot.getChildrenCount();
+                if(snapshot.getChildrenCount()==1)return;
                 Message message = snapshot.getValue(Message.class);
 
-                messageList.add(current_pos++,message);
+                if(!mPrevKey.equals(snapshot.getKey())){
+                    messageList.add(current_pos++,message);
+                }else {
+                    mPrevKey=mLasKey;
+                }
                 if(current_pos == 1){
                     mLasKey = snapshot.getKey();
 
@@ -197,7 +210,7 @@ public class ChatActivity extends AppCompatActivity {
                 messageAdapter.notifyDataSetChanged();
                 mMessagesList.scrollToPosition(messageList.size()-1);
                 mRefreshLayout.setRefreshing(false);
-                mLinearLayout.scrollToPositionWithOffset(TOTAL_ITEM_PER_PAGE,0);
+                mLinearLayout.scrollToPositionWithOffset(current_pos,0);
             }
 
             @Override
@@ -228,11 +241,12 @@ public class ChatActivity extends AppCompatActivity {
         messagesQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Message message = snapshot.getValue(Message.class);
+                Message message = (Message)snapshot.getValue(Message.class);
                 current_pos++;
                 if(current_pos == 1){
+
                     mLasKey = snapshot.getKey();
-                    mPrevKey=mLasKey;
+                    mPrevKey =snapshot.getKey();
                 }
                 messageList.add(message);
                 messageAdapter.notifyDataSetChanged();

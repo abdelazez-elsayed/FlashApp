@@ -1,11 +1,11 @@
 package com.flash.chat;
 
 public class Message {
-    private String msg;
+    public String message;
     private String type;
-    private String seen;
-    private String time;
-
+    private boolean seen;
+    private Long time;
+    private String from;
     public String getFrom() {
         return from;
     }
@@ -14,23 +14,23 @@ public class Message {
         this.from = from;
     }
 
-    private String from;
+
     public Message(){
 
     }
-    public Message(String msg, String type, String seen, String time) {
-        this.msg = msg;
+    public Message(String msg, String type, boolean seen, Long time) {
+        this.message = message;
         this.type = type;
         this.seen = seen;
         this.time = time;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message= message;
     }
 
     public String getType() {
@@ -41,19 +41,19 @@ public class Message {
         this.type = type;
     }
 
-    public String getSeen() {
+    public boolean getSeen() {
         return seen;
     }
 
-    public void setSeen(String seen) {
+    public void setSeen(boolean seen) {
         this.seen = seen;
     }
 
-    public String getTime() {
+    public Long getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Long time) {
         this.time = time;
     }
 }
