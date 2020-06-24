@@ -92,10 +92,10 @@ public class SignUp extends AppCompatActivity {
                             Toast.makeText(SignUp.this, "Success",Toast.LENGTH_SHORT).show();
                             person.setEmail(Email);
                             if (person instanceof User) {
-                                dataBase.addUser(((User) person).setUserId(mAuth.getUid()));
+                                dataBase.addUser(((User) person).setUserId(mAuth.getCurrentUser().getUid()));
                             }
                             else
-                                dataBase.addWorker(((Worker) person).setWorkerId(mAuth.getUid()));
+                                dataBase.addWorker(((Worker) person).setWorkerId(mAuth.getCurrentUser().getUid()));
                         }
                         else {
 
