@@ -44,6 +44,7 @@
         android:layout_marginBottom="-36dp"
         android:background='@color/brandingColorPurple'
         android:contentDescription="@string/image_message"
+        android:scaleType="centerCrop"
         app:srcCompat="@drawable/_bg__artboard_3_copy_2_shape" />
 
 </RelativeLayout>

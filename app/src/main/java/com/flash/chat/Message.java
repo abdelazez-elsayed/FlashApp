@@ -18,7 +18,7 @@ public class Message {
     public Message(){
 
     }
-    public Message(String msg, String type, boolean seen, Long time) {
+    public Message(String message, String type, boolean seen, Long time) {
         this.message = message;
         this.type = type;
         this.seen = seen;
