@@ -55,4 +55,6 @@ parts easily through the app.]]></string>
     <string name="i_m_a_worker">I\'m a WORKER</string>
     <string name="message_hint">Message..</string>
     <string name="logout">Logout</string>
+    <string name="UserName">UserName</string>
+    <string name="displayMessageTime">displayMessageTime</string>
 </resources>
