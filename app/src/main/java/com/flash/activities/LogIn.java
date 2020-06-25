@@ -112,7 +112,7 @@ public class LogIn extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    progressDialog.dismiss();
+              //      progressDialog.dismiss();
                     Toast.makeText(LogIn.this,"Logged In successfully",Toast.LENGTH_SHORT).show();
                     op[0] =SUCCESSFULL_LOGIN;
 

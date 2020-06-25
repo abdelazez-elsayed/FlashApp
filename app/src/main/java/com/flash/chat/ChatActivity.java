@@ -17,6 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.flash.R;
+import com.flash.chat.call.MyCallClientListener;
+import com.flash.chat.call.MySinchClientListener;
+import com.flash.chat.call.MySinchClientListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +34,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.sinch.android.rtc.ClientRegistration;
+import com.sinch.android.rtc.PushPair;
+import com.sinch.android.rtc.Sinch;
+import com.sinch.android.rtc.SinchClient;
+import com.sinch.android.rtc.SinchClientListener;
+import com.sinch.android.rtc.SinchError;
+import com.sinch.android.rtc.calling.Call;
+import com.sinch.android.rtc.calling.CallClient;
+import com.sinch.android.rtc.calling.CallClientListener;
+import com.sinch.android.rtc.calling.CallListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,6 +69,7 @@ public class ChatActivity extends AppCompatActivity {
     private LinearLayoutManager mLinearLayout;
     private MessageAdapter messageAdapter;
     private SwipeRefreshLayout mRefreshLayout;
+    private ImageButton callBtn;
     private static final int  TOTAL_ITEM_PER_PAGE = 10;
     private static final int GALLERY_PICK = 1;
     private int current_page =1;
@@ -72,6 +86,7 @@ public class ChatActivity extends AppCompatActivity {
         sendButton = (ImageButton) findViewById(R.id.send_button);
         messageAdapter = new MessageAdapter(messageList);
         targetNameText = (TextView) findViewById(R.id.char_name);
+        callBtn= (ImageButton) findViewById(R.id.CallBtn);
         addBtn = (ImageButton) findViewById(R.id.add_button);
         chatMsgText = (EditText) findViewById(R.id.messageTextView);
         profileImg = (CircleImageView) findViewById(R.id.custom_bar_image);
@@ -84,14 +99,32 @@ public class ChatActivity extends AppCompatActivity {
         mMessagesList.setAdapter(messageAdapter);
 
 
+
         ////////
         if(extra != null){
             targetUserID = extra.getString("TARGET_USER_ID");
             targetUserName = extra.getString("TARGET_USER_NAME");
         }
+        targetNameText.setText(targetUserName);
         firebaseAuth = FirebaseAuth.getInstance();
         currentUserID=firebaseAuth.getCurrentUser().getUid();
+
         databaseReference =  FirebaseDatabase.getInstance().getReference("Flash");
+        ///Calll /////////////////////////////////////////////////////////////////////////////////////////
+        android.content.Context context = this.getApplicationContext();
+        final SinchClient sinchClient = Sinch.getSinchClientBuilder().context(context)
+                .applicationKey("7cb69c4d-5c98-43cb-a7c6-249d3a6ff0aa")
+                .applicationSecret("7cb69c4d-5c98-43cb-a7c6-249d3a6ff0aa")
+                .environmentHost("clientapi.sinch.com")
+                .userId(currentUserID)
+                .build();
+        sinchClient.addSinchClientListener(new MySinchClientListener());
+        sinchClient.setSupportManagedPush(true);
+        sinchClient.setSupportCalling(true);
+        sinchClient.startListeningOnActiveConnection();
+        CallClient callClient = sinchClient.getCallClient();
+        callClient.addCallClientListener(new MyCallClientListener());
+        ///////////////////////////////////////////////////////////////////////////////////////////////
         loadMessages();
         databaseReference.child("Chat").child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
@@ -116,7 +149,16 @@ public class ChatActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+            /////    ----------------CALL--------------- ///////
         });
+        callBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        //////////////////////////////////////////////////////////
+        //////////////////////Send////////////////////////////////
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

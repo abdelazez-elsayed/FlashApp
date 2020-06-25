@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.flash.R;
 import com.flash.person.Person;
+import com.flash.person.TestMain;
 import com.flash.person.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -22,6 +23,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -48,12 +51,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         Message msg = messagesList.get(position);
         String from = msg.getFrom();
         String type = msg.getType();
-        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Flash").child("Users").child(from);
+        Long timestamp = msg.getTime();
+
+                mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Flash").child("Users").child(from);
         mUserDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String name = snapshot.child("name").getValue().toString();
-
+                        String name = snapshot.child("name").getValue().toString();
+                holder.displayName.setText(name);
 
           //      String image = snapshot.child("thumb_image").getValue().toString();
 
@@ -65,6 +70,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
             }
         });
+        Date date = new Date(timestamp);
+
+        holder.time.setText(date.toString());
 
         if(from.equals(curr_user_id)){
              holder.messageText.setBackgroundColor(Color.WHITE);
@@ -93,12 +101,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public class MessageViewHolder extends RecyclerView.ViewHolder {
         public TextView messageText;
         public CircleImageView profileImage;
-
+        public TextView displayName;
         public ImageView messageImage;
+        public TextView time;
         public MessageViewHolder (View view) {
             super(view);
             messageText = (TextView) view.findViewById(R.id.message_body_layout);
             profileImage = (CircleImageView) view.findViewById(R.id.messgae_profile_pic_layout);
+            displayName = (TextView) view.findViewById(R.id.UserName);
+            time = (TextView) view.findViewById(R.id.MessageTime);
 
             messageImage= (ImageView) view.findViewById(R.id.imageMessage);
         }
