@@ -218,23 +218,24 @@ public class LogIn extends AppCompatActivity {
                     .setUserId(user.getUid())
                     .setUsername(account.getDisplayName())
                     .setPhone("")
+                    .setPostalCode("")
                     .setEmail(account.getEmail());
             dataBase.addUser(currUser);
         }
-        else {
-            Worker currWorker = new Worker();
-            currWorker.setDescription("")
-                    .setLowestEstimatedPrice(0)
-                    .setHighestEstimatedPrice(100)
-                    .setRate(0)
-                    .setWorkerId(user.getUid())
-                    .setNumOfTransactions(0)
-                    .setSpecialization("")
-                    .setUsername(account.getDisplayName())
-                    .setPhone("")
-                    .setEmail(account.getEmail());
-            dataBase.addWorker(currWorker);
-        }
+//        else {
+//            Worker currWorker = new Worker();
+//            currWorker.setDescription("")
+//                    .setLowestEstimatedPrice(0)
+//                    .setHighestEstimatedPrice(100)
+//                    .setRate(0)
+//                    .setWorkerId(user.getUid())
+//                    .setNumOfTransactions(0)
+//                    .setSpecialization("")
+//                    .setUsername(account.getDisplayName())
+//                    .setPhone("")
+//                    .setEmail(account.getEmail());
+//            dataBase.addWorker(currWorker);
+//        }
 
 
         System.out.println(account.getDisplayName() + " " + account.getFamilyName() + " " + account.getEmail());

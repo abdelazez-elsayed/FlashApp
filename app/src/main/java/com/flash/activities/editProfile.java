@@ -27,6 +27,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.flash.DataBase.DataBase;
 import com.flash.R;
 import com.flash.person.User;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -82,9 +83,10 @@ public class editProfile extends AppCompatActivity implements View.OnClickListen
         }
 
         storageReference = FirebaseStorage.getInstance().getReference();
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference = FirebaseDatabase.getInstance().getReference().
+                child("Flash").child("Users").child(user.getUid());
 
-        storageReference.child(firebaseAuth.getUid()).child("Images").
+        storageReference.child(Objects.requireNonNull(firebaseAuth.getUid())).child("Images").
                 child("Profile Pic").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -92,9 +94,7 @@ public class editProfile extends AppCompatActivity implements View.OnClickListen
             }
         });
 
-
-
-        databaseReference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -148,7 +148,7 @@ public class editProfile extends AppCompatActivity implements View.OnClickListen
         User data = new User(mail,name,phone,postal);
         assert user != null;
         data.setUserId(user.getUid());
-        databaseReference.child(user.getUid()).setValue(data);
+        databaseReference.setValue(data);
         Toast.makeText(getApplicationContext(),"User information updated",Toast.LENGTH_LONG).show();
     }
 
@@ -180,35 +180,6 @@ public class editProfile extends AppCompatActivity implements View.OnClickListen
         });
     }
 
-    @SuppressLint("SetTextI18n")
-    public void openSelectProfilePictureDialog() {
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        TextView title = new TextView(this);
-        title.setText("Profile Picture");
-        title.setPadding(10, 10, 10, 10);   // Set Position
-        title.setGravity(Gravity.CENTER);
-        title.setTextColor(Color.BLACK);
-        title.setTextSize(20);
-        alertDialog.setCustomTitle(title);
-        TextView msg = new TextView(this);
-        msg.setText("Please select a profile picture \n Tap the sample avatar logo");
-        msg.setGravity(Gravity.CENTER_HORIZONTAL);
-        msg.setTextColor(Color.BLACK);
-        alertDialog.setView(msg);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,"OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                // Perform Action on Button
-            }
-        });
-        new Dialog(getApplicationContext());
-        alertDialog.show();
-        final Button okBT = alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL);
-        LinearLayout.LayoutParams neutralBtnLP = (LinearLayout.LayoutParams) okBT.getLayoutParams();
-        neutralBtnLP.gravity = Gravity.FILL_HORIZONTAL;
-        okBT.setPadding(50, 10, 10, 10);   // Set Position
-        okBT.setTextColor(Color.BLUE);
-        okBT.setLayoutParams(neutralBtnLP);
-    }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

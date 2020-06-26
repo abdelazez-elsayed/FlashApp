@@ -43,7 +43,7 @@ public class userPofile  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_pofile);
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+
 
         profilePicImageView = findViewById(R.id.profile_pic);
         profileNameTextView = findViewById(R.id.user_name);
@@ -71,10 +71,12 @@ public class userPofile  extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseStorage = FirebaseStorage.getInstance();
-        final DatabaseReference databaseReference = firebaseDatabase.getReference(Objects.requireNonNull(firebaseAuth.getUid()));
+        databaseReference = FirebaseDatabase.getInstance().getReference().
+                child("Flash").child("Users").child(Objects.requireNonNull(firebaseAuth.getUid()));
         StorageReference storageReference = firebaseStorage.getReference();
 
-        storageReference.child(firebaseAuth.getUid()).child("Images").child("Profile Pic").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storageReference.child(Objects.requireNonNull(firebaseAuth.getUid())).child("Images").child("Profile Pic").
+                getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Picasso.get().load(uri).fit().centerInside().into(profilePicImageView);

@@ -3,6 +3,7 @@ package com.flash.activities;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -21,9 +22,15 @@ import com.flash.person.User;
 import com.flash.person.Worker;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.Objects;
 
@@ -99,13 +106,13 @@ public class SignUp extends AppCompatActivity {
                             // successfully signed in and need to navigate to rest of info page
 
                             success[0] = true;
-
-//                            Toast.makeText(SignUp.this, "Success",Toast.LENGTH_SHORT).show();
-//                            person.setEmail(Email);
-//                            if (person instanceof User) {
-//                                dataBase.addUser(((User) person).setUserId(mAuth.getCurrentUser().getUid()));
-//                            }
-//                            else
+                            Toast.makeText(SignUp.this, "Success",Toast.LENGTH_SHORT).show();
+                            person.setEmail(Email);
+                            makeStorageReference();
+                            if (person instanceof User) {
+                                dataBase.addUser(((User) person).setUserId(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()));
+                            }
+                            else{}
 //                                dataBase.addWorker(((Worker) person).setWorkerId(mAuth.getCurrentUser().getUid()));
 
                         }
@@ -121,5 +128,23 @@ public class SignUp extends AppCompatActivity {
         return success[0];
     }
 
-
+    private void makeStorageReference() {
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        StorageReference imageReference = storageReference.child(Objects.requireNonNull(firebaseAuth.getUid())).
+                child("Images").child("Profile Pic"); //User id/Images/Profile Pic.jpg
+        UploadTask uploadTask = imageReference.putFile(Uri.parse("src/main/res/drawable/avatar.png"));
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(SignUp.this, "Error: Uploading profile picture", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(SignUp.this, "Profile picture uploaded", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
