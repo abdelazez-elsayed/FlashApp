@@ -1,11 +1,20 @@
 package com.flash.person;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+
 public class User extends Person {
 
     private int numOfOrders;
     private String userId;
     public double pocket;
-    public User(){}
+    public User(String email, String username, String phone, String postalCode){
+        super( email, username,phone, postalCode);
+    }
+
+    public User() {
+        super();
+    }
 
     public int getNumOfOrders() {
         return numOfOrders;

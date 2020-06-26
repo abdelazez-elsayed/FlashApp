@@ -1,5 +1,8 @@
 package com.flash.person;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+
 public class Worker extends Person {
 
     private String description, workerId, specialization;
@@ -7,7 +10,13 @@ public class Worker extends Person {
     private double rate;
     private int lowestEstimatedPrice, highestEstimatedPrice;
 
-    public Worker() {}
+    public Worker(String email, String username, String phone, String postalCode){
+        super(email, username, phone, postalCode);
+    }
+
+    public Worker() {
+        super();
+    }
 
     public String getWorkerId() {
         return workerId;

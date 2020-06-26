@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F44336"
-    android:clickable="false"
-    tools:context=".activities.SignUp">
+    android:background="#863D8D"
+    tools:context=".activities.editProfile">
 
     <ImageView
         android:id="@+id/imageView3"
@@ -26,19 +25,6 @@
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/rectangle73" />
 
-    <EditText
-        android:id="@+id/PasswordTextup"
-        android:layout_width="371dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/password_string"
-        android:inputType="textPassword"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -52,9 +38,28 @@
         app:srcCompat="@drawable/whitelogo" />
 
     <EditText
-        android:id="@+id/UserNameText"
-        android:layout_width="371dp"
+        android:id="@+id/editTextPhone"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/phone_string"
+        android:inputType="phone"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPostalAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/UserNameText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:autofillHints=""
         android:ems="10"
@@ -63,6 +68,7 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/EmailTextup"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -71,9 +77,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="20dp"
         android:autofillHints=""
         android:ems="10"
+        android:enabled="false"
         android:hint="@string/email_string"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
@@ -82,23 +89,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/imageView3" />
 
-    <EditText
-        android:id="@+id/editTextPhone"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="32dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/phone_string"
-        android:inputType="phone"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/PasswordTextup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <ImageView
         android:id="@+id/photoPicker"
         android:layout_width="125dp"
@@ -106,7 +96,7 @@
         android:layout_marginBottom="40dp"
         android:background="@android:color/white"
         android:contentDescription="@string/todo"
-        android:scaleType="fitXY"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/UserNameText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,44 +104,33 @@
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/avatar" />
 
-    <ImageButton
-        android:id="@+id/signUp"
-        android:layout_width="212dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="56dp"
-        android:background="@android:color/white"
-        android:contentDescription="@string/todo"
+    <Button
+        android:id="@+id/save_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="72dp"
+        android:background="#863D8D"
+        android:text="@string/save"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/signup" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="129dp"
-        android:layout_height="65dp"
-        app:layout_constraintBottom_toTopOf="@+id/signUp"
+    <EditText
+        android:id="@+id/editTextTextPostalAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="128dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/postal_address"
+        android:inputType="textPostalAddress"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/save_data"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <RadioButton
-            android:id="@+id/ClientRadio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/i_m_a_client"
-            android:textAlignment="textStart" />
-
-        <RadioButton
-            android:id="@+id/WorkerRadio"
-            style="@style/Widget.AppCompat.CompoundButton.RadioButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/i_m_a_worker"
-            android:textAlignment="textStart" />
-
-    </RadioGroup>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

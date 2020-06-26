@@ -55,4 +55,7 @@ parts easily through the app.]]></string>
     <string name="i_m_a_worker">I\'m a WORKER</string>
     <string name="message_hint">Message..</string>
     <string name="logout">Logout</string>
+    <string name="postal_address">Postal address</string>
+    <string name="save">Save</string>
+    <string name="edit">Edit</string>
 </resources>

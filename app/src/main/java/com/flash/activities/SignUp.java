@@ -72,11 +72,9 @@ public class SignUp extends AppCompatActivity {
 
                boolean success= signUpWithEmailAndPass(email.getText().toString(), password.getText().toString(),
                         new User().setUsername(userName.getText().toString())
-                                .setPassword(password.getText().toString())
-                                .setPhone(phone.getText().toString())
-                                .setName(userName.getText().toString()));
+                                .setPhone(phone.getText().toString()));
                if(success){
-                   Intent intent = new Intent(SignUp.this, Logout.class);
+                   Intent intent = new Intent(SignUp.this, LogIn.class);
                    startActivity(intent);
                }
 
@@ -99,14 +97,16 @@ public class SignUp extends AppCompatActivity {
                         {
                             progressDialog.dismiss();
                             // successfully signed in and need to navigate to rest of info page
+
                             success[0] = true;
-                            Toast.makeText(SignUp.this, "Success",Toast.LENGTH_SHORT).show();
-                            person.setEmail(Email);
-                            if (person instanceof User) {
-                                dataBase.addUser(((User) person).setUserId(mAuth.getCurrentUser().getUid()));
-                            }
-                            else
-                                dataBase.addWorker(((Worker) person).setWorkerId(mAuth.getCurrentUser().getUid()));
+
+//                            Toast.makeText(SignUp.this, "Success",Toast.LENGTH_SHORT).show();
+//                            person.setEmail(Email);
+//                            if (person instanceof User) {
+//                                dataBase.addUser(((User) person).setUserId(mAuth.getCurrentUser().getUid()));
+//                            }
+//                            else
+//                                dataBase.addWorker(((Worker) person).setWorkerId(mAuth.getCurrentUser().getUid()));
 
                         }
                         else {

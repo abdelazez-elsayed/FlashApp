@@ -63,7 +63,7 @@ public class LogIn extends AppCompatActivity {
         logIn = findViewById(R.id.logInButton);
 //        logInWithFB =(Button)findViewById(R.id.logInWithFB);
         logInWithGoogle = findViewById(R.id.logInWithG);
-        email = findViewById(R.id.EmailTextup);
+        email = findViewById(R.id.EmailTextin);
         password = findViewById(R.id.PasswordTextup);
 
         isUser = true;
@@ -96,7 +96,7 @@ public class LogIn extends AppCompatActivity {
 
     private void gotoChat()
     {
-        Intent intentChat = new Intent(LogIn.this, MainActivity.class);
+        Intent intentChat = new Intent(LogIn.this, editProfile.class);
         startActivity(intentChat);
         finish();
     }
@@ -217,9 +217,7 @@ public class LogIn extends AppCompatActivity {
                     .setNumOfOrders(0)
                     .setUserId(user.getUid())
                     .setUsername(account.getDisplayName())
-                    .setPassword("")
                     .setPhone("")
-                    .setName(account.getGivenName())
                     .setEmail(account.getEmail());
             dataBase.addUser(currUser);
         }
@@ -233,9 +231,7 @@ public class LogIn extends AppCompatActivity {
                     .setNumOfTransactions(0)
                     .setSpecialization("")
                     .setUsername(account.getDisplayName())
-                    .setPassword("")
                     .setPhone("")
-                    .setName(account.getGivenName())
                     .setEmail(account.getEmail());
             dataBase.addWorker(currWorker);
         }

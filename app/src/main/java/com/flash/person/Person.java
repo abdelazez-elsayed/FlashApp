@@ -1,28 +1,39 @@
 package com.flash.person;
 
+import android.graphics.Bitmap;
+
+
 public abstract class Person {
-    public String name;
-    public String email;
-    public String username;
-    public String password;
-    public String phone;
+    private String email;
+    private String username;
+    private String phone;
+    private String postalCode;
+
+    public Person(String email, String username, String phone, String postalCode) {
+        this.email = email;
+        this.username = username;
+        this.phone = phone;
+        this.postalCode = postalCode;
+    }
+
+    public Person() {
+
+    }
 
 
-    Person() {}
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public Person setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+        return this;
+    }
 
 
     public static boolean isValidMail(String email) {
         String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
         return email.matches(regex);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Person setName(String name) {
-        this.name = name;
-        return this;
     }
 
     public String getEmail() {
@@ -43,12 +54,6 @@ public abstract class Person {
         return this;
     }
 
-
-    public Person setPassword(String password) {
-        this.password = password;
-        return this;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -66,9 +71,6 @@ public abstract class Person {
         return getEmail().equals(person.getEmail());
     }
 
-    public String getPassword() {
-        return password;
-    }
 
     @Override
     public int hashCode() {
