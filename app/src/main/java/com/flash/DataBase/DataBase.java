@@ -43,7 +43,7 @@ public class DataBase {
     {
         if (user == null)
             return;
-        userExist(user); // put a listener for checking if there's a duplicate
+        //userExist(user); // put a listener for checking if there's a duplicate
 
         // add the new user to the firebase
         databaseReference.child("Users").child(user.getUserId()).setValue(user);
@@ -57,7 +57,7 @@ public class DataBase {
     {
         if (worker == null)
             return;
-        workerExist(worker);
+       // workerExist(worker);
         databaseReference.child("Workers").child(worker.getWorkerId()).setValue(worker);
        // worker.setWorkerId(workerRef.getKey());
        // workerRef.setValue(worker);
@@ -65,67 +65,56 @@ public class DataBase {
 
 
     // attach a Value Listener to a Query for the given user
-    public void userExist(final User user)
+    public User userExist(String userID)
     {
-        if (user == null)
-            return;
-        Query query = databaseReference.child("Users").orderByChild("email").equalTo(user.getEmail());
+        if (userID == null)
+            return null;
 
         // if there's multiple records with the same email, remove them all except the first one
         // and make success is false to imply that the sign in didn't complete
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        final User[] user = {null};
+        databaseReference.child("Users").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int cnt = 0;
-                if (snapshot.exists()) {
-                    for (DataSnapshot ss : snapshot.getChildren()) {
-                        if (user.getEmail().equals(ss.getValue(User.class).getEmail())) {
-                            Log.v("TAG","Exists");
-                            if (cnt > 0) {
-                                ss.getRef().removeValue();
-                                success = false;
-                            }
-                            cnt++;
-                        }
-                    }
-                }
+                if (snapshot.exists())
+                    user[0] = snapshot.getValue(User.class);
+
+                else
+                    user[0] = null;
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
+        return user[0];
     }
 
     // same as Users but for Workers
-    public void workerExist(final Worker worker)
+    public Worker workerExist(String workerID)
     {
-        if (worker == null)
-            return;
+        if (workerID == null)
+            return null;
 
-        Query query = databaseReference.child("Workers").orderByChild("email").equalTo(worker.getEmail());
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        // if there's multiple records with the same email, remove them all except the first one
+        // and make success is false to imply that the sign in didn't complete
+        final Worker[] worker = {null};
+        databaseReference.child("Workers").child(workerID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int cnt = 0;
-                if (snapshot.exists()) {
-                    Log.v("TAG","INN");
-                    for (DataSnapshot ss : snapshot.getChildren()) {
-                        if (worker.getEmail().equals(ss.getValue(User.class).getEmail())) {
-                            Log.v("TAG","Exists");
-                            if (cnt > 0) {
-                                ss.getRef().removeValue();
-                                success = false;
-                            }
-                            cnt++;
-                        }
-                    }
-                }
+                if (snapshot.exists())
+                    worker[0] = snapshot.getValue(Worker.class);
+
+                else
+                    worker[0] = null;
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
+        return worker[0];
     }
 }
