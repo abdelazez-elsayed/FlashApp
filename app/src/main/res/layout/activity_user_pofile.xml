@@ -73,14 +73,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_pic"
         android:layout_width="125dp"
         android:layout_height="125dp"
         android:background="@android:color/white"
         android:clickable="false"
         android:contentDescription="@string/todo"
-        android:scaleType="fitCenter"
+        android:src="@drawable/group_12"
         app:layout_constraintBottom_toTopOf="@+id/user_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

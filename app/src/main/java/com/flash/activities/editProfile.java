@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,7 +76,7 @@ public class editProfile extends AppCompatActivity implements View.OnClickListen
         firebaseAuth=FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
 
-        if (user== null){
+        if (user == null){
             startActivity(new Intent(getApplicationContext(),LogIn.class));
             finish();
         }
@@ -83,7 +84,7 @@ public class editProfile extends AppCompatActivity implements View.OnClickListen
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        storageReference.child(Objects.requireNonNull(firebaseAuth.getUid())).child("Images").
+        storageReference.child(firebaseAuth.getUid()).child("Images").
                 child("Profile Pic").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -91,21 +92,26 @@ public class editProfile extends AppCompatActivity implements View.OnClickListen
             }
         });
 
+
+
         databaseReference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User userProfile = dataSnapshot.getValue(User.class);
-                assert userProfile != null;
-                editTextName.setText(userProfile.getUsername(), TextView.BufferType.EDITABLE);
-                postalAddress.setText(userProfile.getPostalCode(), TextView.BufferType.EDITABLE);
-                editTextPhoneNo.setText(userProfile.getPhone(), TextView.BufferType.EDITABLE);
-                textViewEmail.setText(userProfile.getEmail(), TextView.BufferType.EDITABLE);
+                if (dataSnapshot.exists()) {
+                    User userProfile = dataSnapshot.getValue(User.class);
+                    assert userProfile != null;
+                    editTextName.setText(userProfile.getUsername(), TextView.BufferType.EDITABLE);
+                    postalAddress.setText(userProfile.getPostalCode(), TextView.BufferType.EDITABLE);
+                    editTextPhoneNo.setText(userProfile.getPhone(), TextView.BufferType.EDITABLE);
+                    textViewEmail.setText(userProfile.getEmail(), TextView.BufferType.EDITABLE);
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(editProfile.this, error.getCode(), Toast.LENGTH_SHORT).show();
             }
         });
+
         profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,7 +134,8 @@ public class editProfile extends AppCompatActivity implements View.OnClickListen
 //            }
             userInformation();
             sendUserData();
-            startActivity(new Intent(editProfile.this, userPofile.class));finish();
+            startActivity(new Intent(editProfile.this, userPofile.class));
+            finish();
         }
     }
 
@@ -150,15 +157,24 @@ public class editProfile extends AppCompatActivity implements View.OnClickListen
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         StorageReference imageReference = storageReference.child(Objects.requireNonNull(firebaseAuth.getUid())).child("Images").child("Profile Pic"); //User id/Images/Profile Pic.jpg
         if(imagePath==null) imagePath = Uri.parse("src/main/res/drawable/avatar.png");
+
+        // show progress dialog until the pic is uploaded
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Upload a photo");
+        progressDialog.setMessage("please wait, we are working to upload your Photo");
+        progressDialog.show();
+
         UploadTask uploadTask = imageReference.putFile(imagePath);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
                 Toast.makeText(editProfile.this, "Error: Uploading profile picture", Toast.LENGTH_SHORT).show();
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                progressDialog.dismiss();
                 Toast.makeText(editProfile.this, "Profile picture uploaded", Toast.LENGTH_SHORT).show();
             }
         });
@@ -205,7 +221,6 @@ public class editProfile extends AppCompatActivity implements View.OnClickListen
                 e.printStackTrace();
             }
         }
-
     }
 
 }

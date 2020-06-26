@@ -71,7 +71,7 @@ public class userPofile  extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseStorage = FirebaseStorage.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference(Objects.requireNonNull(firebaseAuth.getUid()));
+        final DatabaseReference databaseReference = firebaseDatabase.getReference(Objects.requireNonNull(firebaseAuth.getUid()));
         StorageReference storageReference = firebaseStorage.getReference();
 
         storageReference.child(firebaseAuth.getUid()).child("Images").child("Profile Pic").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -85,16 +85,18 @@ public class userPofile  extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(),LogIn.class));
 
         }
-        final FirebaseUser user=firebaseAuth.getCurrentUser();
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User userProfile = dataSnapshot.getValue(User.class);
-                assert userProfile != null;
-                profileNameTextView.setText(userProfile.getUsername());
-                postal.setText(userProfile.getPostalCode());
-                profilePhone.setText(userProfile.getPhone());
-                textViewEmail.setText(userProfile.getEmail());
+                if (dataSnapshot.exists()) {
+                    User userProfile = dataSnapshot.getValue(User.class);
+                    assert userProfile != null;
+                    profileNameTextView.setText(userProfile.getUsername());
+                    postal.setText(userProfile.getPostalCode());
+                    profilePhone.setText(userProfile.getPhone());
+                    textViewEmail.setText(userProfile.getEmail());
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
