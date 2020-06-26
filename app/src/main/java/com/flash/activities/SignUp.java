@@ -77,13 +77,11 @@ public class SignUp extends AppCompatActivity {
                 progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.show();
 
-               boolean success= signUpWithEmailAndPass(email.getText().toString(), password.getText().toString(),
+               signUpWithEmailAndPass(email.getText().toString(), password.getText().toString(),
                         new User().setUsername(userName.getText().toString())
                                 .setPhone(phone.getText().toString()));
-               if(success){
-                   Intent intent = new Intent(SignUp.this, LogIn.class);
-                   startActivity(intent);
-               }
+
+
 
             }
         });
@@ -111,6 +109,8 @@ public class SignUp extends AppCompatActivity {
                             makeStorageReference();
                             if (person instanceof User) {
                                 dataBase.addUser(((User) person).setUserId(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()));
+                                Intent intent = new Intent(SignUp.this, editProfile.class);
+                                startActivity(intent);
                             }
                             else{}
 //                                dataBase.addWorker(((Worker) person).setWorkerId(mAuth.getCurrentUser().getUid()));
@@ -134,6 +134,7 @@ public class SignUp extends AppCompatActivity {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         StorageReference imageReference = storageReference.child(Objects.requireNonNull(firebaseAuth.getUid())).
                 child("Images").child("Profile Pic"); //User id/Images/Profile Pic.jpg
+
         UploadTask uploadTask = imageReference.putFile(Uri.parse("src/main/res/drawable/avatar.png"));
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override

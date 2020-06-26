@@ -31,7 +31,7 @@ public class intro0 extends AppCompatActivity {
                 finish();
             }
             if (firebaseUser != null) {
-                Intent intent = new Intent(intro0.this, editProfile.class);
+                Intent intent = new Intent(intro0.this, userPofile.class);
                 startActivity(intent);
                 finish();
             }

@@ -8,6 +8,15 @@ public abstract class Person {
     private String username;
     private String phone;
     private String postalCode;
+    private String imgPath;
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
 
     public Person(String email, String username, String phone, String postalCode) {
         this.email = email;

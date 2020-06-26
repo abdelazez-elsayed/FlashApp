@@ -3,10 +3,8 @@ package com.flash.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,26 +71,33 @@ public class userPofile  extends AppCompatActivity {
         firebaseStorage = FirebaseStorage.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference().
                 child("Flash").child("Users").child(Objects.requireNonNull(firebaseAuth.getUid()));
-        StorageReference storageReference = firebaseStorage.getReference();
 
-        storageReference.child(Objects.requireNonNull(firebaseAuth.getUid())).child("Images").child("Profile Pic").
-                getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        updateImg();
+        databaseReference.child("img").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).fit().centerInside().into(profilePicImageView);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    updateImg();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
+
+
         if (firebaseAuth.getCurrentUser() == null){
             finish();
             startActivity(new Intent(getApplicationContext(),LogIn.class));
-
         }
+
         final FirebaseUser user = firebaseAuth.getCurrentUser();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    User userProfile = dataSnapshot.getValue(User.class);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.exists()) {
+
+                    User userProfile = snapshot.getValue(User.class);
                     assert userProfile != null;
                     profileNameTextView.setText(userProfile.getUsername());
                     postal.setText(userProfile.getPostalCode());
@@ -100,9 +105,23 @@ public class userPofile  extends AppCompatActivity {
                     textViewEmail.setText(userProfile.getEmail());
                 }
             }
+
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(userPofile.this, databaseError.getCode(), Toast.LENGTH_SHORT).show();
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(userPofile.this, error.getCode(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void updateImg()
+    {
+        StorageReference storageReference = firebaseStorage.getReference();
+        storageReference.child(Objects.requireNonNull(firebaseAuth.getUid())).child("Images").child("Profile Pic").
+                getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).fit().centerInside().into(profilePicImageView);
             }
         });
     }

@@ -61,7 +61,7 @@ public class editProfile extends AppCompatActivity implements View.OnClickListen
     private static int PICK_IMAGE = 123;
     private Uri imagePath;
     private StorageReference storageReference;
-
+    private DataBase dataBase;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
@@ -81,7 +81,7 @@ public class editProfile extends AppCompatActivity implements View.OnClickListen
             startActivity(new Intent(getApplicationContext(),LogIn.class));
             finish();
         }
-
+        dataBase = DataBase.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference().
                 child("Flash").child("Users").child(user.getUid());
@@ -94,11 +94,12 @@ public class editProfile extends AppCompatActivity implements View.OnClickListen
             }
         });
 
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    User userProfile = dataSnapshot.getValue(User.class);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    User userProfile = snapshot.getValue(User.class);
                     assert userProfile != null;
                     editTextName.setText(userProfile.getUsername(), TextView.BufferType.EDITABLE);
                     postalAddress.setText(userProfile.getPostalCode(), TextView.BufferType.EDITABLE);
@@ -106,11 +107,13 @@ public class editProfile extends AppCompatActivity implements View.OnClickListen
                     textViewEmail.setText(userProfile.getEmail(), TextView.BufferType.EDITABLE);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(editProfile.this, error.getCode(), Toast.LENGTH_SHORT).show();
             }
         });
+
 
         profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,8 +137,6 @@ public class editProfile extends AppCompatActivity implements View.OnClickListen
 //            }
             userInformation();
             sendUserData();
-            startActivity(new Intent(editProfile.this, userPofile.class));
-            finish();
         }
     }
 
@@ -146,9 +147,10 @@ public class editProfile extends AppCompatActivity implements View.OnClickListen
         String postal = postalAddress.getText().toString().trim();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         User data = new User(mail,name,phone,postal);
+        data.setImgPath(imagePath != null ? imagePath.toString() : Uri.parse("src/main/res/drawable/avatar.png").toString());
         assert user != null;
         data.setUserId(user.getUid());
-        databaseReference.setValue(data);
+        dataBase.addUser(data);
         Toast.makeText(getApplicationContext(),"User information updated",Toast.LENGTH_LONG).show();
     }
 
@@ -162,6 +164,7 @@ public class editProfile extends AppCompatActivity implements View.OnClickListen
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Upload a photo");
         progressDialog.setMessage("please wait, we are working to upload your Photo");
+        progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
         UploadTask uploadTask = imageReference.putFile(imagePath);
@@ -169,13 +172,17 @@ public class editProfile extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onFailure(@NonNull Exception e) {
                 progressDialog.dismiss();
-                Toast.makeText(editProfile.this, "Error: Uploading profile picture", Toast.LENGTH_SHORT).show();
+                Toast.makeText(editProfile.this, "Error: Uploading profile picture, Try Again", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(editProfile.this, userPofile.class));
+                finish();
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 progressDialog.dismiss();
                 Toast.makeText(editProfile.this, "Profile picture uploaded", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(editProfile.this, userPofile.class));
+                finish();
             }
         });
     }

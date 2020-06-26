@@ -17,6 +17,7 @@ public class DataBase {
 
     //Singleton object of DataBase
     private static DatabaseReference databaseReference;
+    private static int cnt;
     private boolean success; // success of any add operation to avoid duplicates
     private static class Singleton {
         private static final  DataBase DATABASE = new DataBase();
@@ -26,6 +27,7 @@ public class DataBase {
     {
         databaseReference = FirebaseDatabase.getInstance().getReference("Flash");
         success = true;
+        cnt = 0;
     }
 
     public static DataBase getInstance() {
@@ -43,7 +45,6 @@ public class DataBase {
     {
         if (user == null)
             return;
-        //userExist(user); // put a listener for checking if there's a duplicate
 
         // add the new user to the firebase
         databaseReference.child("Users").child(user.getUserId()).setValue(user);
@@ -57,64 +58,9 @@ public class DataBase {
     {
         if (worker == null)
             return;
-       // workerExist(worker);
         databaseReference.child("Workers").child(worker.getWorkerId()).setValue(worker);
        // worker.setWorkerId(workerRef.getKey());
        // workerRef.setValue(worker);
     }
 
-
-    // attach a Value Listener to a Query for the given user
-    public User userExist(String userID)
-    {
-        if (userID == null)
-            return null;
-
-        // if there's multiple records with the same email, remove them all except the first one
-        // and make success is false to imply that the sign in didn't complete
-        final User[] user = {null};
-        databaseReference.child("Users").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists())
-                    user[0] = snapshot.getValue(User.class);
-
-                else
-                    user[0] = null;
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-
-        return user[0];
-    }
-
-    // same as Users but for Workers
-    public Worker workerExist(String workerID)
-    {
-        if (workerID == null)
-            return null;
-
-        // if there's multiple records with the same email, remove them all except the first one
-        // and make success is false to imply that the sign in didn't complete
-        final Worker[] worker = {null};
-        databaseReference.child("Workers").child(workerID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists())
-                    worker[0] = snapshot.getValue(Worker.class);
-
-                else
-                    worker[0] = null;
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-
-        return worker[0];
-    }
 }
