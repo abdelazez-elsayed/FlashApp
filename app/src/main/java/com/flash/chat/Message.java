@@ -6,6 +6,18 @@ public class Message {
     private boolean seen;
     private Long time;
     private String from;
+
+
+
+    public long getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(long sequence) {
+        this.sequence = sequence;
+    }
+
+    private long sequence;
     public String getFrom() {
         return from;
     }
@@ -18,7 +30,7 @@ public class Message {
     public Message(){
 
     }
-    public Message(String message, String type, boolean seen, Long time) {
+    public Message(String msg, String type, boolean seen, Long time) {
         this.message = message;
         this.type = type;
         this.seen = seen;

@@ -34,16 +34,17 @@
         android:textStyle="bold" />
 
     <ImageButton
-        android:id="@+id/CallBtn"
-        android:layout_width="49dp"
+        android:id="@+id/CallButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/char_name"
+        android:layout_alignStart="@+id/char_name"
         android:layout_alignBottom="@+id/char_name"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="19dp"
-        android:layout_marginBottom="3dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="286dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="8dp"
         android:layout_toStartOf="@+id/custom_bar_image"
-        app:srcCompat="@drawable/photopicker"
-        android:contentDescription="TODO" />
+        app:srcCompat="@android:drawable/ic_menu_call" />
 
 </RelativeLayout>

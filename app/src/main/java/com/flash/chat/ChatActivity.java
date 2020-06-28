@@ -1,6 +1,9 @@
 package com.flash.chat;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,16 +12,21 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.flash.Codes;
 import com.flash.R;
+import com.flash.activities.intro1;
+import com.flash.chat.call.CallActivity;
 import com.flash.chat.call.MyCallClientListener;
-import com.flash.chat.call.MySinchClientListener;
 import com.flash.chat.call.MySinchClientListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -34,16 +42,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.sinch.android.rtc.ClientRegistration;
-import com.sinch.android.rtc.PushPair;
 import com.sinch.android.rtc.Sinch;
 import com.sinch.android.rtc.SinchClient;
-import com.sinch.android.rtc.SinchClientListener;
-import com.sinch.android.rtc.SinchError;
 import com.sinch.android.rtc.calling.Call;
 import com.sinch.android.rtc.calling.CallClient;
 import com.sinch.android.rtc.calling.CallClientListener;
-import com.sinch.android.rtc.calling.CallListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,18 +67,25 @@ public class ChatActivity extends AppCompatActivity {
     private EditText chatMsgText;
     private TextView targetNameText;
     private CircleImageView profileImg;
+    private ImageButton callBtn;
     private RecyclerView mMessagesList;
     private final List<Message> messageList= new ArrayList<>();
     private LinearLayoutManager mLinearLayout;
     private MessageAdapter messageAdapter;
     private SwipeRefreshLayout mRefreshLayout;
-    private ImageButton callBtn;
     private static final int  TOTAL_ITEM_PER_PAGE = 10;
     private static final int GALLERY_PICK = 1;
     private int current_page =1;
     private int current_pos = 0;
     private String mLasKey = "";
     private String mPrevKey = "";
+    private Intent intentCall;
+
+    boolean isCallingAllowed=true;
+   static CallClient callClient;
+   static SinchClient sinchClient;
+   static Call call;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,45 +96,29 @@ public class ChatActivity extends AppCompatActivity {
         sendButton = (ImageButton) findViewById(R.id.send_button);
         messageAdapter = new MessageAdapter(messageList);
         targetNameText = (TextView) findViewById(R.id.char_name);
-        callBtn= (ImageButton) findViewById(R.id.CallBtn);
         addBtn = (ImageButton) findViewById(R.id.add_button);
         chatMsgText = (EditText) findViewById(R.id.messageTextView);
         profileImg = (CircleImageView) findViewById(R.id.custom_bar_image);
         mMessagesList = (RecyclerView) findViewById(R.id.messagesList);
+        callBtn = (ImageButton) findViewById(R.id.CallButton);
         mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.message_swipe_refresh);
         mMessagesList.setHasFixedSize(true);
         messageAdapter = new MessageAdapter(messageList);
         mLinearLayout = new LinearLayoutManager(this);
         mMessagesList.setLayoutManager(mLinearLayout);
         mMessagesList.setAdapter(messageAdapter);
-
-
-
+        targetNameText = (TextView) findViewById(R.id.char_name);
+        intentCall = new Intent(this,CallActivity.class);
         ////////
         if(extra != null){
             targetUserID = extra.getString("TARGET_USER_ID");
             targetUserName = extra.getString("TARGET_USER_NAME");
         }
-        targetNameText.setText(targetUserName);
         firebaseAuth = FirebaseAuth.getInstance();
         currentUserID=firebaseAuth.getCurrentUser().getUid();
-
         databaseReference =  FirebaseDatabase.getInstance().getReference("Flash");
-        ///Calll /////////////////////////////////////////////////////////////////////////////////////////
-        android.content.Context context = this.getApplicationContext();
-        final SinchClient sinchClient = Sinch.getSinchClientBuilder().context(context)
-                .applicationKey("7cb69c4d-5c98-43cb-a7c6-249d3a6ff0aa")
-                .applicationSecret("7cb69c4d-5c98-43cb-a7c6-249d3a6ff0aa")
-                .environmentHost("clientapi.sinch.com")
-                .userId(currentUserID)
-                .build();
-        sinchClient.addSinchClientListener(new MySinchClientListener());
-        sinchClient.setSupportManagedPush(true);
-        sinchClient.setSupportCalling(true);
-        sinchClient.startListeningOnActiveConnection();
-        CallClient callClient = sinchClient.getCallClient();
-        callClient.addCallClientListener(new MyCallClientListener());
-        ///////////////////////////////////////////////////////////////////////////////////////////////
+        DatabaseReference sinchReference = databaseReference.child("SINCH_SECRET");
+
         loadMessages();
         databaseReference.child("Chat").child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
@@ -149,16 +143,38 @@ public class ChatActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-            /////    ----------------CALL--------------- ///////
         });
-        callBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        /////////////////////////////////////////// CALLL //////////////////////////////////////////////////////////////
 
+        callBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(isCallingAllowed){
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+
+                        if (checkSelfPermission(Manifest.permission.RECORD_AUDIO)
+                                == PackageManager.PERMISSION_DENIED) {
+
+                            Log.d("permission", "permission denied to SEND_SMS - requesting it");
+                            String[] permissions = {Manifest.permission.RECORD_AUDIO};
+
+                            requestPermissions(permissions,Codes.RECORD_AUDIO_PERMISSION_REQUEST_CODE);
+
+                        }else {
+                                intentCall.putExtra("isACaller",true);
+                             CallActivity.call = MainActivity.callClient.callUser(targetUserID);
+                             startActivity(intentCall);
+                        }
+                    }
+
+                }else {
+                        Log.d("CALL","CALL Not allowed");
+                        Toast.makeText(ChatActivity.this,"Required the user to allow contacting",Toast.LENGTH_SHORT).show();
+                    }
             }
-        });
-        //////////////////////////////////////////////////////////
-        //////////////////////Send////////////////////////////////
+        }
+        );
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -283,6 +299,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Message message = (Message)snapshot.getValue(Message.class);
+
                 current_pos++;
                 if(current_pos == 1){
 
@@ -345,6 +362,22 @@ public class ChatActivity extends AppCompatActivity {
 
         }
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == Codes.RECORD_AUDIO_PERMISSION_REQUEST_CODE) {
+            if (!contains(grantResults,PackageManager.PERMISSION_DENIED)) {
+                intentCall.putExtra("isACaller",true);
+                call = MainActivity.callClient.callUser(targetUserID);
+                startActivity(intentCall);
 
+            }
+        }
+    }
+    private boolean contains(int[] grantResult,int permission){
+        for(int i=0;i<grantResult.length;i++){
+            if(grantResult[i]==permission)return true;
+        }
+        return false;
+    }
 
 }

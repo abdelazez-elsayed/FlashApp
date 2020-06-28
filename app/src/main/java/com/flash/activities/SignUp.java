@@ -1,6 +1,5 @@
 package com.flash.activities;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageButton;
 
 import com.flash.DataBase.DataBase;
 import com.flash.R;
@@ -50,7 +48,7 @@ public class SignUp extends AppCompatActivity {
         userName = findViewById(R.id.UserNameText);
         phone = findViewById(R.id.editTextPhone);
         email = findViewById(R.id.EmailTextup);
-        password = findViewById(R.id.PasswordTextup);
+        password = findViewById(R.id.PasswordTextin);
 
         radioClient = findViewById(R.id.ClientRadio);
         radioWorker = findViewById(R.id.WorkerRadio);

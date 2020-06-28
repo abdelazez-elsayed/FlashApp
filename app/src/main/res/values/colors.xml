@@ -2,6 +2,8 @@
 <resources>
     <!-- 1-->
     <color name="_bg__artboard_3_copy_2_color">#ffffff</color>
+    <color name="GREEN">#3EEE0D</color>
+    <color name="RED">#FF0000</color>
     <!-- 2-->
 
     <!-- 3-->
