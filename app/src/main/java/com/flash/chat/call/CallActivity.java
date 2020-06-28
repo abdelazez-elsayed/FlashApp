@@ -1,8 +1,12 @@
 package com.flash.chat.call;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.Image;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +17,10 @@ import android.widget.TextView;
 
 import com.flash.R;
 import com.flash.chat.MainActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.sinch.android.rtc.PushPair;
 import com.sinch.android.rtc.calling.Call;
 import com.sinch.android.rtc.calling.CallListener;
@@ -39,6 +47,18 @@ public class CallActivity extends AppCompatActivity {
         callStatus = (TextView )findViewById(R.id.call_status);
         displayProfileImage = (CircleImageView) findViewById(R.id.call_profile_image);
 
+       DatabaseReference reference=  MainActivity.databaseReference.child("Users").child(call.getRemoteUserId()).child("name");
+       reference.addListenerForSingleValueEvent(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot snapshot) {
+               displayName.setText((String) snapshot.getValue());
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError error) {
+
+           }
+       });
         Bundle extras = getIntent().getExtras();
         if(extras!=null) {
             isACaller = extras.getBoolean("isACaller");
@@ -63,6 +83,7 @@ public class CallActivity extends AppCompatActivity {
 
             @Override
             public void onCallEstablished(Call call) {
+                MainActivity.ringtone.stop();
                 Log.d("CALL","CALL STARTED");
                 callStatus.setText(R.string.inCall);
                 acceptButton.setVisibility(View.INVISIBLE);
@@ -75,6 +96,7 @@ public class CallActivity extends AppCompatActivity {
 
             @Override
             public void onCallEnded(Call call) {
+                MainActivity.ringtone.stop();
                 Log.d("CALL","CALL Ended");
                 finish();
             }

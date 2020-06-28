@@ -7,6 +7,9 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -41,8 +44,11 @@ public class MainActivity extends AppCompatActivity {
     private Button chatButton;
     static String currentUserID;
     ProgressBar progressBar;
+    public static DatabaseReference databaseReference;
+    public static Ringtone ringtone;
     public static final String Sinch_KEY = "7cb69c4d-5c98-43cb-a7c6-249d3a6ff0aa";
     Intent intentCall;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
         currentUserID= FirebaseAuth.getInstance().getCurrentUser().getUid();
         Codes.userID=currentUserID;
         Context context = this;
-        DatabaseReference ref =  FirebaseDatabase.getInstance().getReference("Flash").child("SINCH_SECRET");
+        databaseReference =  FirebaseDatabase.getInstance().getReference("Flash");
+        DatabaseReference ref= databaseReference.child("SINCH_SECRET");
         progressBar = (ProgressBar) findViewById(R.id.main_progressBar);
 
        chatButton = (Button) findViewById(R.id.Btn);
@@ -125,6 +132,9 @@ public class MainActivity extends AppCompatActivity {
                     }else {
                         intentCall.putExtra("isACaller",false);
                         CallActivity.call=call;
+                        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+                         ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                         ringtone.play();
                         startActivity(intentCall);
                     }
                 }
