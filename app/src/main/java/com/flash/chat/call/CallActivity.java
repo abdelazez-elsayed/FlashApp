@@ -17,13 +17,17 @@ import android.widget.TextView;
 
 import com.flash.R;
 import com.flash.chat.MainActivity;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.sinch.android.rtc.PushPair;
 import com.sinch.android.rtc.calling.Call;
 import com.sinch.android.rtc.calling.CallListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -59,6 +63,14 @@ public class CallActivity extends AppCompatActivity {
 
            }
        });
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+                storageReference.child(call.getRemoteUserId()).child("Images").child("Profile Pic")
+                .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.get().load(uri).fit().placeholder(R.drawable.default_avatar).into(displayProfileImage);
+                    }
+                });
         Bundle extras = getIntent().getExtras();
         if(extras!=null) {
             isACaller = extras.getBoolean("isACaller");
